@@ -1,5 +1,5 @@
 //
-//  Form.swift
+//  FormModel.swift
 //  ClvrtcTaskSeven
 //
 //  Created by Artyom Beldeiko on 24.01.23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Form: Codable {
+struct FormModel: Codable {
     let title: String
     let image: String
     let fields: [Field]
