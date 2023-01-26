@@ -8,11 +8,14 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     let screenSize: CGRect = UIScreen.main.bounds
-        
+    
+    var form: Form?
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
+        FormFieldType.registerCells(for: tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -33,12 +36,12 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchFormData()
         setupViews()
         setupConstraints()
         
-        
-        title = "ADSADAS"
-        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,4 +98,60 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate(sendButtonContraints)
     }
     
+    private func fetchFormData() {
+        NetworkManager.shared.getForm { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.form = data
+                
+                DispatchQueue.main.async {
+                    self.title = self.form?.title
+                    self.tableView.reloadData()
+                }
+                
+                guard let image = self.form?.image else { return }
+                
+                NetworkManager.shared.downloadImage(with: image) { image in
+                    guard let image = image else { return }
+                    self.imageView.image = image
+                }
+                
+            case .failure(_):
+                print("Failed to fetch data.")
+            }
+        }
+    }
 }
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return form?.fields.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let field = form?.fields[indexPath.row]
+        
+        let cell: UITableViewCell
+        
+        if let formFieldType = form?.fields[indexPath.row].fieldType {
+            cell = formFieldType.dequeueCell(for: tableView, at: indexPath)
+        } else {
+            cell = UITableViewCell()
+        }
+        
+        if let updatableCell = cell as? FieldUpdatable {
+            updatableCell.update(with: field!)
+        }
+        
+        return cell
+    }
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    
+}
+
