@@ -1,0 +1,6 @@
+framework module Pods_ClvrtcTaskSeven {
+  umbrella header "Pods-ClvrtcTaskSeven-umbrella.h"
+
+  export *
+  module * { export * }
+}
