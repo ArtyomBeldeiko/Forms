@@ -12,7 +12,13 @@
 		393ADB6229805E9200ECC4E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 393ADB6129805E9200ECC4E7 /* Assets.xcassets */; };
 		393ADB6529805E9200ECC4E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 393ADB6329805E9200ECC4E7 /* LaunchScreen.storyboard */; };
 		393ADB6D298060AC00ECC4E7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB6C298060AC00ECC4E7 /* MainViewController.swift */; };
-		393ADB73298077E400ECC4E7 /* FormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB72298077E400ECC4E7 /* FormModel.swift */; };
+		393ADB73298077E400ECC4E7 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB72298077E400ECC4E7 /* Form.swift */; };
+		393ADB832981ADB400ECC4E7 /* FormTextualTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB822981ADB400ECC4E7 /* FormTextualTableViewCell.swift */; };
+		393ADB852981BB6B00ECC4E7 /* FormNumericTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB842981BB6B00ECC4E7 /* FormNumericTableViewCell.swift */; };
+		393ADB872981BC4200ECC4E7 /* FormValuableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB862981BC4200ECC4E7 /* FormValuableTableViewCell.swift */; };
+		393ADB8A2981D33000ECC4E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB892981D33000ECC4E7 /* NetworkManager.swift */; };
+		3996ED3A2983262400020786 /* FormFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED392983262400020786 /* FormFieldType.swift */; };
+		60DE4D99A106FCDBE2AF5849 /* Pods_ClvrtcTaskSeven.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +29,15 @@
 		393ADB6429805E9200ECC4E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		393ADB6629805E9200ECC4E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		393ADB6C298060AC00ECC4E7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		393ADB72298077E400ECC4E7 /* FormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
+		393ADB72298077E400ECC4E7 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		393ADB822981ADB400ECC4E7 /* FormTextualTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextualTableViewCell.swift; sourceTree = "<group>"; };
+		393ADB842981BB6B00ECC4E7 /* FormNumericTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormNumericTableViewCell.swift; sourceTree = "<group>"; };
+		393ADB862981BC4200ECC4E7 /* FormValuableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValuableTableViewCell.swift; sourceTree = "<group>"; };
+		393ADB892981D33000ECC4E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3996ED392983262400020786 /* FormFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldType.swift; sourceTree = "<group>"; };
+		56FF54CE8B1CA503DC61CD0A /* Pods-ClvrtcTaskSeven.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.release.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.release.xcconfig"; sourceTree = "<group>"; };
+		74AAE5FDF858C4DFE207713F /* Pods-ClvrtcTaskSeven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.debug.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.debug.xcconfig"; sourceTree = "<group>"; };
+		A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClvrtcTaskSeven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +45,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DE4D99A106FCDBE2AF5849 /* Pods_ClvrtcTaskSeven.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02BB49B52CE848C11A032D19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		393ADB4C29805E9100ECC4E7 = {
 			isa = PBXGroup;
 			children = (
 				393ADB5729805E9100ECC4E7 /* ClvrtcTaskSeven */,
 				393ADB5629805E9100ECC4E7 /* Products */,
+				8FC0508D6B1193CFEC804F72 /* Pods */,
+				02BB49B52CE848C11A032D19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				393ADB6E2980612500ECC4E7 /* Application */,
+				393ADB882981D30D00ECC4E7 /* NetworkManager */,
 				393ADB6F2980613400ECC4E7 /* Controllers */,
 				393ADB712980773100ECC4E7 /* Models */,
 				393ADB702980614200ECC4E7 /* Resources */,
@@ -77,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				393ADB6C298060AC00ECC4E7 /* MainViewController.swift */,
+				393ADB812981AD5900ECC4E7 /* Cells */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -94,9 +121,37 @@
 		393ADB712980773100ECC4E7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				393ADB72298077E400ECC4E7 /* FormModel.swift */,
+				393ADB72298077E400ECC4E7 /* Form.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		393ADB812981AD5900ECC4E7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				393ADB822981ADB400ECC4E7 /* FormTextualTableViewCell.swift */,
+				393ADB842981BB6B00ECC4E7 /* FormNumericTableViewCell.swift */,
+				393ADB862981BC4200ECC4E7 /* FormValuableTableViewCell.swift */,
+				3996ED392983262400020786 /* FormFieldType.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		393ADB882981D30D00ECC4E7 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				393ADB892981D33000ECC4E7 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		8FC0508D6B1193CFEC804F72 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				74AAE5FDF858C4DFE207713F /* Pods-ClvrtcTaskSeven.debug.xcconfig */,
+				56FF54CE8B1CA503DC61CD0A /* Pods-ClvrtcTaskSeven.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 393ADB6929805E9200ECC4E7 /* Build configuration list for PBXNativeTarget "ClvrtcTaskSeven" */;
 			buildPhases = (
+				34179E4211205D0FF5891170 /* [CP] Check Pods Manifest.lock */,
 				393ADB5129805E9100ECC4E7 /* Sources */,
 				393ADB5229805E9100ECC4E7 /* Frameworks */,
 				393ADB5329805E9100ECC4E7 /* Resources */,
+				4D22A6D30BC95582901F3913 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,15 +221,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34179E4211205D0FF5891170 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ClvrtcTaskSeven-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D22A6D30BC95582901F3913 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		393ADB5129805E9100ECC4E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				393ADB8A2981D33000ECC4E7 /* NetworkManager.swift in Sources */,
 				393ADB6D298060AC00ECC4E7 /* MainViewController.swift in Sources */,
-				393ADB73298077E400ECC4E7 /* FormModel.swift in Sources */,
+				393ADB73298077E400ECC4E7 /* Form.swift in Sources */,
 				393ADB5929805E9100ECC4E7 /* AppDelegate.swift in Sources */,
+				3996ED3A2983262400020786 /* FormFieldType.swift in Sources */,
 				393ADB5B29805E9100ECC4E7 /* SceneDelegate.swift in Sources */,
+				393ADB852981BB6B00ECC4E7 /* FormNumericTableViewCell.swift in Sources */,
+				393ADB872981BC4200ECC4E7 /* FormValuableTableViewCell.swift in Sources */,
+				393ADB832981ADB400ECC4E7 /* FormTextualTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +410,7 @@
 		};
 		393ADB6A29805E9200ECC4E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74AAE5FDF858C4DFE207713F /* Pods-ClvrtcTaskSeven.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -333,6 +438,7 @@
 		};
 		393ADB6B29805E9200ECC4E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56FF54CE8B1CA503DC61CD0A /* Pods-ClvrtcTaskSeven.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
