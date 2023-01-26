@@ -8,9 +8,11 @@
 import UIKit
 
 
-class FormTextualTableViewCell: UITableViewCell {
-
+class FormTextualTableViewCell: UITableViewCell, FieldConformity {
+    
     static let identifier = "FormTextualTableViewCell"
+    
+    var field: Field?
     
     lazy var titleLable: UILabel = {
         let label = UILabel()
@@ -59,6 +61,14 @@ class FormTextualTableViewCell: UITableViewCell {
     
         NSLayoutConstraint.activate(titleLabelContraints)
         NSLayoutConstraint.activate(textFieldContraint)
+    }
+}
+
+extension FormTextualTableViewCell: FieldUpdatable {
+    func update(with field: Field) {
+        self.field = field
+        
+        titleLable.text = field.title
     }
 }
 

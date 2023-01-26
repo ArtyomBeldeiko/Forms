@@ -7,14 +7,15 @@
 
 import UIKit
 
-class FormValuableTableViewCell: UITableViewCell {
-
+class FormValuableTableViewCell: UITableViewCell, FieldConformity {
+    
     static let identifier = "FormValuableTableViewCell"
+    
+    var field: Field?
         
     lazy var valueSelectionButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.setTitle("Выберите значение", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -29,6 +30,14 @@ class FormValuableTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension FormValuableTableViewCell: FieldUpdatable {
+    func update(with field: Field) {
+        self.field = field
+        
+        valueSelectionButton.setTitle(field.title, for: .normal)
     }
 }
 

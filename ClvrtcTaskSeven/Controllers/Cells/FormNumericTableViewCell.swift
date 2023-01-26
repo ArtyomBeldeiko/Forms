@@ -7,9 +7,11 @@
 
 import UIKit
 
-class FormNumericTableViewCell: UITableViewCell {
-
+class FormNumericTableViewCell: UITableViewCell, FieldConformity {
+    
     static let identifier = "FormNumericTableViewCell"
+    
+    var field: Field?
     
     lazy var titleLable: UILabel = {
         let label = UILabel()
@@ -58,6 +60,14 @@ class FormNumericTableViewCell: UITableViewCell {
     
         NSLayoutConstraint.activate(titleLabelContraints)
         NSLayoutConstraint.activate(textFieldContraint)
+    }
+}
+
+extension FormNumericTableViewCell: FieldUpdatable {
+    func update(with field: Field) {
+        self.field = field
+        
+        titleLable.text = field.title
     }
 }
 
