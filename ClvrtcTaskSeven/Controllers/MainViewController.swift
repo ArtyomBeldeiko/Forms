@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     let screenSize: CGRect = UIScreen.main.bounds
     
     var form: Form?
+    var clevertecImage: UIImage?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -96,6 +97,7 @@ class MainViewController: UIViewController {
                 NetworkManager.shared.downloadImage(with: image) { image in
                     guard let image = image else { return }
                     self.imageView.image = image
+                    self.clevertecImage = image
                 }
                 
             case .failure(_):
@@ -125,6 +127,10 @@ extension MainViewController: UITableViewDataSource {
             updatableCell.update(with: field!)
         }
         
+        if let updatableCell = cell as? FormValuableTableViewCell {
+            updatableCell.delegate = self
+        }
+        
         return cell
     }
     
@@ -137,10 +143,24 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 65
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
 }
 
 extension MainViewController: UITableViewDelegate {
     
-    
+}
+
+extension MainViewController: FormValuableTableViewCellDelegate {
+    func presentValueSelectionVC(with cell: FormValuableTableViewCell) {
+        let valueSelectionVC = ValueSelectionViewController()
+        
+        valueSelectionVC.values = cell.values
+        valueSelectionVC.imageView.image = clevertecImage
+        
+        navigationController?.present(valueSelectionVC, animated: true)
+    }
 }
 
