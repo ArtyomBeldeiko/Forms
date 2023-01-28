@@ -15,7 +15,7 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
     lazy var titleLable: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .black
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,8 +24,9 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
     lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.font = .systemFont(ofSize: 18, weight: .medium)
+        textField.font = .systemFont(ofSize: 16, weight: .medium)
         textField.textColor = .black
+        textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -48,13 +49,14 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
     private func setConstraints() {
         let titleLabelContraints = [
-            titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            titleLable.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            titleLable.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLable.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            titleLable.trailingAnchor.constraint(lessThanOrEqualTo: contentView.centerXAnchor)
         ]
         
         let textFieldContraint = [
-            textField.leadingAnchor.constraint(equalTo: titleLable.trailingAnchor, constant: 15),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            textField.leadingAnchor.constraint(equalTo: titleLable.trailingAnchor, constant: 10),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             textField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ]
     

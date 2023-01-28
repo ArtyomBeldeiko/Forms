@@ -15,7 +15,7 @@ class TableViewFooter: UITableViewHeaderFooterView {
         
     private lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor(red: 240 / 255, green: 84 / 255, blue: 87 / 255, alpha: 1)
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         button.setTitle("Отправить", for: .normal)
         button.setTitleColor(.white, for: .normal)

@@ -19,6 +19,7 @@
 		393ADB8A2981D33000ECC4E7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ADB892981D33000ECC4E7 /* NetworkManager.swift */; };
 		3996ED3A2983262400020786 /* FormFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED392983262400020786 /* FormFieldType.swift */; };
 		3996ED3D2984587800020786 /* TableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED3C2984587800020786 /* TableViewFooter.swift */; };
+		3996ED3F29852BF000020786 /* ValueSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED3E29852BF000020786 /* ValueSelectionViewController.swift */; };
 		60DE4D99A106FCDBE2AF5849 /* Pods_ClvrtcTaskSeven.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		393ADB892981D33000ECC4E7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3996ED392983262400020786 /* FormFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFieldType.swift; sourceTree = "<group>"; };
 		3996ED3C2984587800020786 /* TableViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewFooter.swift; sourceTree = "<group>"; };
+		3996ED3E29852BF000020786 /* ValueSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueSelectionViewController.swift; sourceTree = "<group>"; };
 		56FF54CE8B1CA503DC61CD0A /* Pods-ClvrtcTaskSeven.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.release.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.release.xcconfig"; sourceTree = "<group>"; };
 		74AAE5FDF858C4DFE207713F /* Pods-ClvrtcTaskSeven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.debug.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.debug.xcconfig"; sourceTree = "<group>"; };
 		A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClvrtcTaskSeven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				393ADB6C298060AC00ECC4E7 /* MainViewController.swift */,
+				3996ED3E29852BF000020786 /* ValueSelectionViewController.swift */,
 				393ADB812981AD5900ECC4E7 /* Cells */,
 			);
 			path = Controllers;
@@ -285,6 +288,7 @@
 				393ADB5929805E9100ECC4E7 /* AppDelegate.swift in Sources */,
 				3996ED3A2983262400020786 /* FormFieldType.swift in Sources */,
 				393ADB5B29805E9100ECC4E7 /* SceneDelegate.swift in Sources */,
+				3996ED3F29852BF000020786 /* ValueSelectionViewController.swift in Sources */,
 				393ADB852981BB6B00ECC4E7 /* FormNumericTableViewCell.swift in Sources */,
 				393ADB872981BC4200ECC4E7 /* FormValuableTableViewCell.swift in Sources */,
 				3996ED3D2984587800020786 /* TableViewFooter.swift in Sources */,
