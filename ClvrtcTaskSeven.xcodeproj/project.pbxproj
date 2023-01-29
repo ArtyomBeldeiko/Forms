@@ -23,6 +23,7 @@
 		3996ED422985DA7B00020786 /* Validator + TextualField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED412985DA7B00020786 /* Validator + TextualField.swift */; };
 		3996ED442985E87500020786 /* Validator + NumericField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED432985E87500020786 /* Validator + NumericField.swift */; };
 		3996ED472985F82200020786 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED462985F82200020786 /* String + Extension.swift */; };
+		3996ED49298709B500020786 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3996ED48298709B500020786 /* Response.swift */; };
 		60DE4D99A106FCDBE2AF5849 /* Pods_ClvrtcTaskSeven.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		3996ED412985DA7B00020786 /* Validator + TextualField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator + TextualField.swift"; sourceTree = "<group>"; };
 		3996ED432985E87500020786 /* Validator + NumericField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validator + NumericField.swift"; sourceTree = "<group>"; };
 		3996ED462985F82200020786 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		3996ED48298709B500020786 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		56FF54CE8B1CA503DC61CD0A /* Pods-ClvrtcTaskSeven.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.release.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.release.xcconfig"; sourceTree = "<group>"; };
 		74AAE5FDF858C4DFE207713F /* Pods-ClvrtcTaskSeven.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClvrtcTaskSeven.debug.xcconfig"; path = "Target Support Files/Pods-ClvrtcTaskSeven/Pods-ClvrtcTaskSeven.debug.xcconfig"; sourceTree = "<group>"; };
 		A4A4F044A037473D2FD1728D /* Pods_ClvrtcTaskSeven.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClvrtcTaskSeven.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				393ADB72298077E400ECC4E7 /* Form.swift */,
+				3996ED48298709B500020786 /* Response.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				393ADB6D298060AC00ECC4E7 /* MainViewController.swift in Sources */,
 				3996ED472985F82200020786 /* String + Extension.swift in Sources */,
 				393ADB73298077E400ECC4E7 /* Form.swift in Sources */,
+				3996ED49298709B500020786 /* Response.swift in Sources */,
 				3996ED442985E87500020786 /* Validator + NumericField.swift in Sources */,
 				393ADB5929805E9100ECC4E7 /* AppDelegate.swift in Sources */,
 				3996ED3A2983262400020786 /* FormFieldType.swift in Sources */,

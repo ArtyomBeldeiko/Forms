@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol TableViewFooterDelegate {
+    func sendButtonTapped(in headerFooterView: TableViewFooter)
+}
+
 class TableViewFooter: UITableViewHeaderFooterView {
 
     static let identifier = "TableViewFooter"
     
     let screenSize: CGRect = UIScreen.main.bounds
+    
+    var delegate: TableViewFooterDelegate?
         
     private lazy var sendButton: UIButton = {
         let button = UIButton()
@@ -19,6 +25,7 @@ class TableViewFooter: UITableViewHeaderFooterView {
         button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         button.setTitle("Отправить", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(sendButtonDidTap), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -49,5 +56,9 @@ class TableViewFooter: UITableViewHeaderFooterView {
         ]
 
         NSLayoutConstraint.activate(sendButtonConstraints)
+    }
+    
+    @objc private func sendButtonDidTap() {
+        delegate?.sendButtonTapped(in: self)
     }
 }

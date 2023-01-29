@@ -15,7 +15,7 @@ class MainViewController: UIViewController {
     var clevertecImage: UIImage?
     var textualFieldValue: String?
     var numericalFieldValue: String?
-    var listFieldValue: String? 
+    var listFieldValue: String?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -33,11 +33,12 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
-    private let sendButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+//    private lazy var sendButton: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +50,11 @@ class MainViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-        
+    
     private func configureTableView() {
         tableView.backgroundColor = .clear
     }
-        
+    
     private func setupViews() {
         configureTableView()
         
@@ -76,7 +77,7 @@ class MainViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
-                
+        
         NSLayoutConstraint.activate(imageViewContraints)
         NSLayoutConstraint.activate(tableViewContraints)
     }
@@ -108,6 +109,36 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+//    @objc private func sendButtonTapped() {
+//        guard let textualFieldValue = textualFieldValue else {
+//            print("text error")
+//            return
+//        }
+//
+//        guard let numericalFieldValue = numericalFieldValue else {
+//            print("number error")
+//            return
+//        }
+//
+//        guard let listFieldValue = listFieldValue else {
+//            print("listValue error")
+//            return
+//        }
+//
+//        NetworkManager.shared.sendFieldData(textualField: textualFieldValue, numericalField: numericalFieldValue, listValue: listFieldValue) { [weak self] result in
+//
+//            guard let self = self else { return }
+//
+//            switch result {
+//            case .success(let responseResult):
+//                print(responseResult)
+//
+//            case .failure(_):
+//                print("Response failure")
+//            }
+//        }
+//    }
 }
 
 extension MainViewController: UITableViewDataSource {
@@ -146,7 +177,9 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewFooter.identifier)
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableViewFooter.identifier) as! TableViewFooter
+        
+        footer.delegate = self
         
         return footer
     }
@@ -181,12 +214,16 @@ extension MainViewController: FormValuableTableViewCellDelegate {
                 self.listFieldValue = "v3"
             }
         }
-
+        
         navigationController?.present(valueSelectionVC, animated: true)
     }
 }
 
 extension MainViewController: FormTextualTableViewCellDelegate {
+    func textFieldShouldReturn(in tableViewCell: FormTextualTableViewCell) {
+        self.view.endEditing(true)
+    }
+    
     func textFieldEditingChange(in tableViewCell: FormTextualTableViewCell, textEditingChange: String?) {
         guard let textualValue = tableViewCell.textField.text else { return }
         
@@ -201,6 +238,10 @@ extension MainViewController: FormTextualTableViewCellDelegate {
 }
 
 extension MainViewController: FormNumericTableViewCelllDelegate {
+    func textFieldShouldReturn(in tableViewCell: FormNumericTableViewCell) {
+        self.view.endEditing(true)
+    }
+    
     func textFieldDidEndEditing(in tableViewCell: FormNumericTableViewCell, textEditingDidEnd: String?) {
         guard let numericalValue = tableViewCell.textField.text else { return }
         
@@ -214,9 +255,39 @@ extension MainViewController: FormNumericTableViewCelllDelegate {
             } else {
                 numericalFieldValue = numericalValue
             }
-            print(numericalFieldValue)
+        }
+    }
+}
+
+extension MainViewController: TableViewFooterDelegate {
+    func sendButtonTapped(in headerFooterView: TableViewFooter) {
+        guard let textualFieldValue = textualFieldValue else {
+            print("text error")
+            return
         }
         
+        guard let numericalFieldValue = numericalFieldValue else {
+            print("number error")
+            return
+        }
+        
+        guard let listFieldValue = listFieldValue else {
+            print("listValue error")
+            return
+        }
+        
+        NetworkManager.shared.sendFieldData(textualField: textualFieldValue, numericalField: numericalFieldValue, listValue: listFieldValue) { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let responseResult):
+                print(responseResult.result)
+                
+            case .failure(_):
+                print("Response failure")
+            }
+        }
     }
 }
 

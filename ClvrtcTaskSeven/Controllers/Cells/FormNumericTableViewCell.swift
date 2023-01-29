@@ -9,6 +9,7 @@ import UIKit
 
 protocol FormNumericTableViewCelllDelegate {
     func textFieldDidEndEditing(in tableViewCell: FormNumericTableViewCell, textEditingDidEnd: String?)
+    func textFieldShouldReturn (in tableViewCell: FormNumericTableViewCell)
 }
 
 class FormNumericTableViewCell: UITableViewCell, FieldConformity {
@@ -32,7 +33,9 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
         textField.font = .systemFont(ofSize: 16, weight: .medium)
         textField.textColor = .black
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .numbersAndPunctuation
         textField.addTarget(self, action: #selector(textEditingDidEnd(_:)), for: .editingDidEnd)
+        textField.addTarget(self, action: #selector(textFieldShouldReturn(_:)), for: .editingDidEndOnExit)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -72,6 +75,10 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
     @objc private func textEditingDidEnd(_ sender: UITextField) {
         delegate?.textFieldDidEndEditing(in: self, textEditingDidEnd: sender.text)
+    }
+    
+    @objc private func textFieldShouldReturn(_ sender: UITextField) {
+        delegate?.textFieldShouldReturn(in: self)
     }
 }
 

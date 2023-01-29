@@ -9,6 +9,7 @@ import UIKit
 
 protocol FormTextualTableViewCellDelegate {
     func textFieldEditingChange(in tableViewCell: FormTextualTableViewCell, textEditingChange: String?)
+    func textFieldShouldReturn (in tableViewCell: FormTextualTableViewCell)
 }
 
 class FormTextualTableViewCell: UITableViewCell, FieldConformity {
@@ -33,6 +34,7 @@ class FormTextualTableViewCell: UITableViewCell, FieldConformity {
         textField.textColor = .black
         textField.borderStyle = .roundedRect
         textField.addTarget(self, action: #selector(textEditingChange(_:)), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldShouldReturn(_:)), for: .editingDidEndOnExit)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -72,6 +74,10 @@ class FormTextualTableViewCell: UITableViewCell, FieldConformity {
     
     @objc private func textEditingChange(_ sender: UITextField) {
         delegate?.textFieldEditingChange(in: self, textEditingChange: sender.text)
+    }
+    
+    @objc private func textFieldShouldReturn(_ sender: UITextField) {
+        delegate?.textFieldShouldReturn(in: self)
     }
 }
 
