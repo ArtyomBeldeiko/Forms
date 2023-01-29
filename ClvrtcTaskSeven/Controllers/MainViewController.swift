@@ -136,7 +136,8 @@ class MainViewController: UIViewController {
     private func showTextualValueErrorAlert() {
         let textualValueErrorAlert = UIAlertController(title: "Ошибка текстового поля", message: "Допускаются только буквы латинского и кириллического алфавита, а также цифры", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+            self.textualFieldValue = nil
             self.dismiss(animated: true)
         }
         
@@ -148,7 +149,8 @@ class MainViewController: UIViewController {
     private func showNumericalValueErrorAlert() {
         let numericalValueErrorAlert = UIAlertController(title: "Ошибка числового поля", message: "Допускаются только цифры", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+            self.numericalFieldValue = nil
             self.dismiss(animated: true)
         }
         
@@ -160,13 +162,26 @@ class MainViewController: UIViewController {
     private func showListValueErrorAlert() {
         let listValueErrorAlert = UIAlertController(title: "Ошибка поля выбора значения", message: "Выберите значение", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+            self.listFieldValue = nil
             self.dismiss(animated: true)
         }
         
         listValueErrorAlert.addAction(okAction)
         
         self.present(listValueErrorAlert, animated: true)
+    }
+    
+    private func showResultAlert(from responseResult: String) {
+        let resultAlert = UIAlertController(title: nil, message: responseResult, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+            self.dismiss(animated: true)
+        }
+        
+        resultAlert.addAction(okAction)
+        
+        self.present(resultAlert, animated: true)
     }
 }
 
@@ -311,7 +326,12 @@ extension MainViewController: TableViewFooterDelegate {
             
             switch result {
             case .success(let responseResult):
-                print(responseResult.result)
+                
+                DispatchQueue.main.async {
+                    self.activityIndicatorContainer.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.showResultAlert(from: responseResult.result)
+                }
                 
             case .failure(_):
                 print("Response failure")
