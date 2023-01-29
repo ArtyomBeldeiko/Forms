@@ -33,13 +33,18 @@ class MainViewController: UIViewController {
         return tableView
     }()
     
-//    private lazy var sendButton: UIButton = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
+    lazy var activityIndicatorContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .black
+        return activityIndicator
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +54,10 @@ class MainViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        activityIndicator.center = view.center
     }
     
     private func configureTableView() {
@@ -61,6 +70,15 @@ class MainViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(imageView)
         view.addSubview(tableView)
+        
+        presentActivityIndicator()
+    }
+    
+    private func presentActivityIndicator() {
+        view.addSubview(activityIndicatorContainer)
+        activityIndicatorContainer.frame = view.bounds
+        activityIndicatorContainer.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     private func setupConstraints() {
@@ -102,6 +120,11 @@ class MainViewController: UIViewController {
                     guard let image = image else { return }
                     self.imageView.image = image
                     self.clevertecImage = image
+                    
+                    DispatchQueue.main.async {
+                        self.activityIndicatorContainer.isHidden = true
+                        self.activityIndicator.stopAnimating()
+                    }
                 }
                 
             case .failure(_):
@@ -109,39 +132,9 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
-//    @objc private func sendButtonTapped() {
-//        guard let textualFieldValue = textualFieldValue else {
-//            print("text error")
-//            return
-//        }
-//
-//        guard let numericalFieldValue = numericalFieldValue else {
-//            print("number error")
-//            return
-//        }
-//
-//        guard let listFieldValue = listFieldValue else {
-//            print("listValue error")
-//            return
-//        }
-//
-//        NetworkManager.shared.sendFieldData(textualField: textualFieldValue, numericalField: numericalFieldValue, listValue: listFieldValue) { [weak self] result in
-//
-//            guard let self = self else { return }
-//
-//            switch result {
-//            case .success(let responseResult):
-//                print(responseResult)
-//
-//            case .failure(_):
-//                print("Response failure")
-//            }
-//        }
-//    }
 }
 
-extension MainViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return form?.fields.count ?? 0
     }
@@ -191,10 +184,6 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-}
-
-extension MainViewController: UITableViewDelegate {
-    
 }
 
 extension MainViewController: FormValuableTableViewCellDelegate {
@@ -275,6 +264,9 @@ extension MainViewController: TableViewFooterDelegate {
             print("listValue error")
             return
         }
+        
+        activityIndicator.startAnimating()
+        activityIndicatorContainer.isHidden = false
         
         NetworkManager.shared.sendFieldData(textualField: textualFieldValue, numericalField: numericalFieldValue, listValue: listFieldValue) { [weak self] result in
             
