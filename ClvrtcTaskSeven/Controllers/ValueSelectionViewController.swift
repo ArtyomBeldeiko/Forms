@@ -12,8 +12,9 @@ class ValueSelectionViewController: UIViewController {
     let screenSize: CGRect = UIScreen.main.bounds
     
     var values = [String]()
-    
-    
+    var selectedValue: String?
+    var completionHandler: ((String) -> Void)?
+   
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -27,8 +28,9 @@ class ValueSelectionViewController: UIViewController {
         return pickerView
     }()
     
-    private let confirmButton: UIButton = {
+    private lazy var confirmButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -93,6 +95,14 @@ class ValueSelectionViewController: UIViewController {
         NSLayoutConstraint.activate(confirmButtonContraints)
         NSLayoutConstraint.activate(imageViewContraints)
     }
+    
+    @objc private func confirmButtonTapped() {
+        if let value = selectedValue {
+            completionHandler?(value)
+        }
+        
+        dismiss(animated: true)
+    }
 }
 
 extension ValueSelectionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -110,7 +120,7 @@ extension ValueSelectionViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        selectedValue = values[row]
     }
 }
 
