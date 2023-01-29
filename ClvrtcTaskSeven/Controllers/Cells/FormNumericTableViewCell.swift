@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol FormNumericTableViewCelllDelegate {
+    func textFieldDidEndEditing(in tableViewCell: FormNumericTableViewCell, textEditingDidEnd: String?)
+}
+
 class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
     static let identifier = "FormNumericTableViewCell"
     
+    var delegate: FormNumericTableViewCelllDelegate?
     var field: Field?
     
     lazy var titleLable: UILabel = {
@@ -27,6 +32,7 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
         textField.font = .systemFont(ofSize: 16, weight: .medium)
         textField.textColor = .black
         textField.borderStyle = .roundedRect
+        textField.addTarget(self, action: #selector(textEditingDidEnd(_:)), for: .editingDidEnd)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -62,6 +68,10 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
     
         NSLayoutConstraint.activate(titleLabelContraints)
         NSLayoutConstraint.activate(textFieldContraint)
+    }
+    
+    @objc private func textEditingDidEnd(_ sender: UITextField) {
+        delegate?.textFieldDidEndEditing(in: self, textEditingDidEnd: sender.text)
     }
 }
 

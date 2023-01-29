@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
     
     var form: Form?
     var clevertecImage: UIImage?
+    var textualFieldValue: String?
+    var numericalFieldValue: String?
+    var listFieldValue: String? 
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -64,7 +67,7 @@ class MainViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: screenSize.width - 40),
             imageView.heightAnchor.constraint(equalToConstant: screenSize.height / 4),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ]
         
         let tableViewContraints = [
@@ -131,6 +134,14 @@ extension MainViewController: UITableViewDataSource {
             updatableCell.delegate = self
         }
         
+        if let updatableCell = cell as? FormTextualTableViewCell {
+            updatableCell.delegate = self
+        }
+        
+        if let updatableCell = cell as? FormNumericTableViewCell {
+            updatableCell.delegate = self
+        }
+        
         return cell
     }
     
@@ -141,11 +152,11 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 65
+        return 75
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+        return 50
     }
 }
 
@@ -159,8 +170,53 @@ extension MainViewController: FormValuableTableViewCellDelegate {
         
         valueSelectionVC.values = cell.values
         valueSelectionVC.imageView.image = clevertecImage
-        
+        valueSelectionVC.completionHandler = { value in
+            if value == "Не выбрано" {
+                self.listFieldValue = "none"
+            } else if value == "Первое значение" {
+                self.listFieldValue = "v1"
+            } else if value == "Второе значение" {
+                self.listFieldValue = "v2"
+            } else if value == "Третье значение" {
+                self.listFieldValue = "v3"
+            }
+        }
+
         navigationController?.present(valueSelectionVC, animated: true)
+    }
+}
+
+extension MainViewController: FormTextualTableViewCellDelegate {
+    func textFieldEditingChange(in tableViewCell: FormTextualTableViewCell, textEditingChange: String?) {
+        guard let textualValue = tableViewCell.textField.text else { return }
+        
+        let isValidValue = validateTextualField(with: textualValue)
+        
+        if isValidValue == false {
+            textualFieldValue = ""
+        } else {
+            textualFieldValue = textualValue
+        }
+    }
+}
+
+extension MainViewController: FormNumericTableViewCelllDelegate {
+    func textFieldDidEndEditing(in tableViewCell: FormNumericTableViewCell, textEditingDidEnd: String?) {
+        guard let numericalValue = tableViewCell.textField.text else { return }
+        
+        let isValidValue = validateNumericField(with: numericalValue)
+        
+        if isValidValue == false {
+            print("Incorrect")
+        } else {
+            if numericalValue.contains(",") {
+                numericalFieldValue = String(numericalValue.doubleValue)
+            } else {
+                numericalFieldValue = numericalValue
+            }
+            print(numericalFieldValue)
+        }
+        
     }
 }
 
