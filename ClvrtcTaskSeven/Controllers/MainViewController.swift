@@ -132,6 +132,42 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+    private func showTextualValueErrorAlert() {
+        let textualValueErrorAlert = UIAlertController(title: "Ошибка текстового поля", message: "Допускаются только буквы латинского и кириллического алфавита, а также цифры", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+            self.dismiss(animated: true)
+        }
+        
+        textualValueErrorAlert.addAction(okAction)
+        
+        self.present(textualValueErrorAlert, animated: true)
+    }
+    
+    private func showNumericalValueErrorAlert() {
+        let numericalValueErrorAlert = UIAlertController(title: "Ошибка числового поля", message: "Допускаются только цифры", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+            self.dismiss(animated: true)
+        }
+        
+        numericalValueErrorAlert.addAction(okAction)
+        
+        self.present(numericalValueErrorAlert, animated: true)
+    }
+    
+    private func showListValueErrorAlert() {
+        let listValueErrorAlert = UIAlertController(title: "Ошибка поля выбора значения", message: "Выберите значение", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Хорошо", style: .default) { _ in
+            self.dismiss(animated: true)
+        }
+        
+        listValueErrorAlert.addAction(okAction)
+        
+        self.present(listValueErrorAlert, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
@@ -194,7 +230,7 @@ extension MainViewController: FormValuableTableViewCellDelegate {
         valueSelectionVC.imageView.image = clevertecImage
         valueSelectionVC.completionHandler = { value in
             if value == "Не выбрано" {
-                self.listFieldValue = "none"
+                self.showListValueErrorAlert()
             } else if value == "Первое значение" {
                 self.listFieldValue = "v1"
             } else if value == "Второе значение" {
@@ -220,6 +256,7 @@ extension MainViewController: FormTextualTableViewCellDelegate {
         
         if isValidValue == false {
             textualFieldValue = ""
+            showTextualValueErrorAlert()
         } else {
             textualFieldValue = textualValue
         }
@@ -237,7 +274,7 @@ extension MainViewController: FormNumericTableViewCelllDelegate {
         let isValidValue = validateNumericField(with: numericalValue)
         
         if isValidValue == false {
-            print("Incorrect")
+            showNumericalValueErrorAlert()
         } else {
             if numericalValue.contains(",") {
                 numericalFieldValue = String(numericalValue.doubleValue)
@@ -251,17 +288,17 @@ extension MainViewController: FormNumericTableViewCelllDelegate {
 extension MainViewController: TableViewFooterDelegate {
     func sendButtonTapped(in headerFooterView: TableViewFooter) {
         guard let textualFieldValue = textualFieldValue else {
-            print("text error")
+            showTextualValueErrorAlert()
             return
         }
         
         guard let numericalFieldValue = numericalFieldValue else {
-            print("number error")
+            showNumericalValueErrorAlert()
             return
         }
         
         guard let listFieldValue = listFieldValue else {
-            print("listValue error")
+            showListValueErrorAlert()
             return
         }
         

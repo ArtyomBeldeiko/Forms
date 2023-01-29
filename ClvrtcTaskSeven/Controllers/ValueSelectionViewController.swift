@@ -97,11 +97,24 @@ class ValueSelectionViewController: UIViewController {
     }
     
     @objc private func confirmButtonTapped() {
-        if let value = selectedValue {
-            completionHandler?(value)
+        guard let value = selectedValue else {
+            self.showListValueErrorAlert()
+            return
         }
         
+        completionHandler?(value)
+        
         dismiss(animated: true)
+    }
+    
+    private func showListValueErrorAlert() {
+        let listValueErrorAlert = UIAlertController(title: "Ошибка поля выбора значения", message: "Выберите значение", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Хорошо", style: .default)
+        
+        listValueErrorAlert.addAction(okAction)
+        
+        self.present(listValueErrorAlert, animated: true)
     }
 }
 
