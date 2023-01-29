@@ -10,6 +10,7 @@ import Kingfisher
 
 struct NetworkManagerConstants {
     static let getRequestUrl = "http://test.clevertec.ru/tt/meta/"
+    static let postRequestUrl = "http://test.clevertec.ru/tt/data/"
 }
 
 class NetworkManager {
@@ -31,7 +32,7 @@ class NetworkManager {
         task.resume()
     }
     
-    func downloadImage(with urlString : String, imageCompletionHandler: @escaping (UIImage?) -> Void){
+    func downloadImage(with urlString: String, imageCompletionHandler: @escaping (UIImage?) -> Void){
         guard let url = URL.init(string: urlString) else { return  imageCompletionHandler(nil) }
         
         let resource = ImageResource(downloadURL: url)
@@ -44,5 +45,33 @@ class NetworkManager {
                 imageCompletionHandler(nil)
             }
         }
+    }
+    
+    func sendFieldData(textualField: String, numericalField: String, listValue: String, completion: @escaping (Result<Response, Error>) -> Void) {
+        guard let url = URL(string: "\(NetworkManagerConstants.postRequestUrl)") else { return }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        
+        let form: [String : Any] = ["form" : ["text" : textualField, "numeric" : numericalField, "list" : listValue]]
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: form)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else { return }
+
+            do {
+                let response = try JSONDecoder().decode(Response.self, from: data)
+                completion(.success(response))
+            }
+            catch {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
     }
 }
