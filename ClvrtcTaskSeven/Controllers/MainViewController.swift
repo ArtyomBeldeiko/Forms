@@ -197,6 +197,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let formFieldType = form?.fields[indexPath.row].fieldType {
             cell = formFieldType.dequeueCell(for: tableView, at: indexPath)
+            cell.selectionStyle = .none
         } else {
             cell = UITableViewCell()
         }
