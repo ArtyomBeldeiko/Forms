@@ -14,14 +14,14 @@ class ValueSelectionViewController: UIViewController {
     var values = [String]()
     var selectedValue: String?
     var completionHandler: ((String) -> Void)?
-   
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-        
+    
     private let valuePicker: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ class ValueSelectionViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +70,7 @@ class ValueSelectionViewController: UIViewController {
     }
     
     private func setConstraints() {
-                
+        
         let imageViewContraints = [
             imageView.widthAnchor.constraint(equalToConstant: screenSize.width - 40),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
@@ -90,7 +90,7 @@ class ValueSelectionViewController: UIViewController {
             confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             confirmButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
         ]
-
+        
         NSLayoutConstraint.activate(valuePickerContraints)
         NSLayoutConstraint.activate(confirmButtonContraints)
         NSLayoutConstraint.activate(imageViewContraints)
@@ -117,6 +117,8 @@ class ValueSelectionViewController: UIViewController {
         self.present(listValueErrorAlert, animated: true)
     }
 }
+
+// MARK: - ValueSelectionViewController
 
 extension ValueSelectionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

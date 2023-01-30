@@ -12,13 +12,13 @@ protocol TableViewFooterDelegate {
 }
 
 class TableViewFooter: UITableViewHeaderFooterView {
-
+    
     static let identifier = "TableViewFooter"
     
     let screenSize: CGRect = UIScreen.main.bounds
     
     var delegate: TableViewFooterDelegate?
-        
+    
     private lazy var sendButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 240 / 255, green: 84 / 255, blue: 87 / 255, alpha: 1)
@@ -54,7 +54,7 @@ class TableViewFooter: UITableViewHeaderFooterView {
             sendButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             sendButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ]
-
+        
         NSLayoutConstraint.activate(sendButtonConstraints)
     }
     

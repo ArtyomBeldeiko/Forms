@@ -57,12 +57,12 @@ class NetworkManager {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         let form: [String : Any] = ["form" : ["text" : textualField, "numeric" : numericalField, "list" : listValue]]
-
+        
         request.httpBody = try? JSONSerialization.data(withJSONObject: form)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else { return }
-
+            
             do {
                 let response = try JSONDecoder().decode(Response.self, from: data)
                 completion(.success(response))

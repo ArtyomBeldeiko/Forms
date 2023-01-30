@@ -81,6 +81,8 @@ class FormTextualTableViewCell: UITableViewCell, FieldConformity {
     }
 }
 
+// MARK: - FieldUpdatable
+
 extension FormTextualTableViewCell: FieldUpdatable {
     func update(with field: Field) {
         self.field = field

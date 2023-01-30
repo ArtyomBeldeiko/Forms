@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
         activityIndicator.color = .black
         return activityIndicator
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,7 +116,10 @@ class MainViewController: UIViewController {
                 
                 guard let image = self.form?.image else { return }
                 
-                NetworkManager.shared.downloadImage(with: image) { image in
+                NetworkManager.shared.downloadImage(with: image) { [weak self] image in
+                    
+                    guard let self = self else { return }
+                    
                     guard let image = image else { return }
                     self.imageView.image = image
                     self.clevertecImage = image
@@ -133,10 +136,14 @@ class MainViewController: UIViewController {
         }
     }
     
+    //    MARK: - UIAlerts
+    
     private func showTextualValueErrorAlert() {
         let textualValueErrorAlert = UIAlertController(title: "Ошибка текстового поля", message: "Допускаются только буквы латинского и кириллического алфавита, а также цифры", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             self.textualFieldValue = nil
             self.dismiss(animated: true)
         }
@@ -149,7 +156,9 @@ class MainViewController: UIViewController {
     private func showNumericalValueErrorAlert() {
         let numericalValueErrorAlert = UIAlertController(title: "Ошибка числового поля", message: "Допускаются только цифры", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             self.numericalFieldValue = nil
             self.dismiss(animated: true)
         }
@@ -162,7 +171,9 @@ class MainViewController: UIViewController {
     private func showListValueErrorAlert() {
         let listValueErrorAlert = UIAlertController(title: "Ошибка поля выбора значения", message: "Выберите значение", preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             self.listFieldValue = nil
             self.dismiss(animated: true)
         }
@@ -175,7 +186,9 @@ class MainViewController: UIViewController {
     private func showResultAlert(from responseResult: String) {
         let resultAlert = UIAlertController(title: nil, message: responseResult, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Закрыть", style: .default) { _ in
+        let okAction = UIAlertAction(title: "Закрыть", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
             self.dismiss(animated: true)
         }
         
@@ -184,6 +197,8 @@ class MainViewController: UIViewController {
         self.present(resultAlert, animated: true)
     }
 }
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -238,13 +253,17 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+// MARK: - FormValuableTableViewCellDelegate
+
 extension MainViewController: FormValuableTableViewCellDelegate {
     func presentValueSelectionVC(with cell: FormValuableTableViewCell) {
         let valueSelectionVC = ValueSelectionViewController()
         
         valueSelectionVC.values = cell.values
         valueSelectionVC.imageView.image = clevertecImage
-        valueSelectionVC.completionHandler = { value in
+        valueSelectionVC.completionHandler = { [weak self] value in
+            guard let self = self else { return }
+            
             if value == "Не выбрано" {
                 self.showListValueErrorAlert()
             } else if value == "Первое значение" {
@@ -259,6 +278,8 @@ extension MainViewController: FormValuableTableViewCellDelegate {
         navigationController?.present(valueSelectionVC, animated: true)
     }
 }
+
+// MARK: - FormTextualTableViewCellDelegate
 
 extension MainViewController: FormTextualTableViewCellDelegate {
     func textFieldShouldReturn(in tableViewCell: FormTextualTableViewCell) {
@@ -278,6 +299,8 @@ extension MainViewController: FormTextualTableViewCellDelegate {
         }
     }
 }
+
+// MARK: - FormNumericTableViewCelllDelegate
 
 extension MainViewController: FormNumericTableViewCelllDelegate {
     func textFieldShouldReturn(in tableViewCell: FormNumericTableViewCell) {
@@ -300,6 +323,8 @@ extension MainViewController: FormNumericTableViewCelllDelegate {
         }
     }
 }
+
+// MARK: - TableViewFooterDelegate
 
 extension MainViewController: TableViewFooterDelegate {
     func sendButtonTapped(in headerFooterView: TableViewFooter) {

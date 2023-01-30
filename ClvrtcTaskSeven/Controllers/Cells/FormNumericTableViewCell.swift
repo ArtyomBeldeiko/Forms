@@ -39,7 +39,7 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-        
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -68,7 +68,7 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
             textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             textField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ]
-    
+        
         NSLayoutConstraint.activate(titleLabelContraints)
         NSLayoutConstraint.activate(textFieldContraint)
     }
@@ -81,6 +81,8 @@ class FormNumericTableViewCell: UITableViewCell, FieldConformity {
         delegate?.textFieldShouldReturn(in: self)
     }
 }
+
+// MARK: - FieldUpdatable
 
 extension FormNumericTableViewCell: FieldUpdatable {
     func update(with field: Field) {

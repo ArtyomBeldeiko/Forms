@@ -8,7 +8,6 @@
 import UIKit
 
 protocol FormValuableTableViewCellDelegate {
-    
     func presentValueSelectionVC(with cell: FormValuableTableViewCell)
 }
 
@@ -62,6 +61,8 @@ class FormValuableTableViewCell: UITableViewCell, FieldConformity {
         delegate?.presentValueSelectionVC(with: self)
     }
 }
+
+// MARK: - FieldUpdatable
 
 extension FormValuableTableViewCell: FieldUpdatable {
     func update(with field: Field) {
